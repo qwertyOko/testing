@@ -1,77 +1,95 @@
 .header {
   width: 100%;
-  height: 64px;
-  background: #fff;
-  border-bottom: 1px solid #ececec;
+  max-width: 1920px;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  font-family: sans-serif;
+}
+
+/* Верхняя полоса */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.leftLinks {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.leftLinks a {
+  text-decoration: none;
+  color: black;
+  
+}
+
+.activeLink {
+  color: #1a5eff;
+  font-weight: bold;
+}
+
+.phoneNumber {
+  color: #1a5eff;
+}
+
+/* Средняя полоса */
+.middleBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 36px;
-  position: relative;
-  z-index: 10;
+  padding: 20px 40px;
+  background-color: white;
 }
-.left {
-  display: flex;
-  align-items: center;
-}
+
 .logo {
-  width: 48px;
-  height: 32px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #1a5eff;
 }
-.nav {
+
+.searchBlock {
   display: flex;
-  align-items: center;
-  gap: 32px;
-  margin-left: 32px;
-}
-.promo {
-  color: #2351b2;
-  font-weight: 500;
-  text-decoration: none;
-}
-.nav a {
-  color: #222;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 400;
-}
-.center {
   flex: 1;
-  display: flex;
-  justify-content: center;
+  margin: 0 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
 }
-.searchBox {
-  background: #f5f5f5;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  width: 420px;
-  height: 38px;
-}
-.searchInput {
+
+.searchBlock input {
+  flex: 1;
+  padding: 10px;
   border: none;
-  background: transparent;
-  font-size: 16px;
-  flex: 1;
   outline: none;
-  padding: 0 8px;
 }
-.searchIcon {
+
+.searchBlock button {
+  background: white;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.iconBlock {
+  display: flex;
+  gap: 20px;
   font-size: 20px;
-  color: #222;
-  margin-left: 8px;
+  cursor: pointer;
 }
-.icons {
+
+/* Каталог */
+.catalogBar {
+  background-color: #1a5eff;
+  color: white;
+  font-size: 18px;
+  padding: 14px 40px;
   display: flex;
   align-items: center;
-  gap: 28px;
-  margin-left: 32px;
-}
-.icon {
-  font-size: 22px;
-  color: #222;
-  display: flex;
-  align-items: center;
+  gap: 12px;
   cursor: pointer;
 }

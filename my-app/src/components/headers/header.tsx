@@ -1,30 +1,42 @@
-import React from "react";
-import Image from "next/image";
-import styles from "./header.module.css";
+// components/Header.tsx
+import styles from './header.module.css';
+import { FaSearch, FaHeart, FaShoppingBag, FaUser, FaBars } from 'react-icons/fa';
 
 export default function Header() {
   return (
     <header className={styles.header}>
-      <div className={styles.left}>
-        <Image src="/logo.png" alt="Allures" width={48} height={32} className={styles.logo} />
+      {/* Верхняя полоса */}
+      <div className={styles.topBar}>
+        <div className={styles.leftLinks}>
+          <span>📍 Київ</span>
+          <a href="#">Про нас</a>
+          <a href="#" className={styles.activeLink}>Акції</a>
+          <a href="#">Новини</a>
+          <a href="#">Служба підтримки</a>
+        </div>
+        <div className={styles.phoneNumber}>(044) 202 22 00</div>
       </div>
-      <nav className={styles.nav}>
-        <a href="#" className={styles.promo}>Акції</a>
-        <a href="#">Про нас</a>
-        <a href="#">Підтримка</a>
-      </nav>
-      <div className={styles.center}>
-        <div className={styles.searchBox}>
-          <input className={styles.searchInput} placeholder="Я шукаю..." />
-          <span className={styles.searchIcon}>🔍</span>
+
+      {/* Средняя часть: логотип, поиск, иконки */}
+      <div className={styles.middleBar}>
+        <div className={styles.logo}>AИ</div>
+
+        <div className={styles.searchBlock}>
+          <input type="text" placeholder="Шукати товари..." />
+          <button><FaSearch /></button>
+        </div>
+
+        <div className={styles.iconBlock}>
+          <FaHeart />
+          <FaShoppingBag />
+          <FaUser />
         </div>
       </div>
-      <div className={styles.icons}>
-        <span className={styles.icon}>♡</span>
-        <span className={styles.icon}>
-          <Image src="/basket.png" alt="Basket" width={24} height={24} />
-        </span>
-        <span className={styles.icon}>👤</span>
+
+      {/* Каталог товарів */}
+      <div className={styles.catalogBar}>
+        <FaBars />
+        <span>Каталог товарів</span>
       </div>
     </header>
   );
