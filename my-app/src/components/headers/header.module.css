@@ -1,3 +1,26 @@
+.dropdown {
+  background-color: white;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 10px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropdownItem {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  padding: 6px 8px;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 4px;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f4ff;
+  color: #1a5eff;
+}
 .header {
   width: 100%;
   max-width: 1920px;
@@ -92,4 +115,14 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
+}
+.catalogText {
+  margin-left: 280px; /* например, сдвинуть вправо */
+  transform: translateY(2px); /* или вверх/вниз */
+}
+.catalogIcon {
+  display: flex;
+  align-items: center;
+  margin-left: 280px; /* например, сдвинуть вправо */
+
 }
