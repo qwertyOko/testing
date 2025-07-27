@@ -110,19 +110,16 @@
   background-color: #1a5eff;
   color: white;
   font-size: 18px;
-  padding: 14px 40px;
+  padding: 14px 40px 14px 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 5px;
   cursor: pointer;
 }
-.catalogText {
-  margin-left: 280px; /* например, сдвинуть вправо */
-  transform: translateY(2px); /* или вверх/вниз */
-}
-.catalogIcon {
+.catalogContent {
   display: flex;
   align-items: center;
-  margin-left: 280px; /* например, сдвинуть вправо */
-
+  gap: 5px;
+  margin-left: 20px;
+  transform: translateY(2px);
 }

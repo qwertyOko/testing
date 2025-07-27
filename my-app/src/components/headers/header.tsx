@@ -81,8 +81,10 @@ export default function Header() {
         className={styles.catalogBar}
         onClick={() => setShowDropdown(!showDropdown)}
       >
-        <div className={styles.catalogIcon}><FaBars /></div>
-        <span className={styles.catalogText}>Каталог товарів</span>
+        <div className={styles.catalogContent}>
+          <FaBars className={styles.catalogIcon} />
+          <span className={styles.catalogText}>Каталог товарів</span>
+        </div>
       </div>
 
       {showDropdown && categories.length > 0 && (

@@ -1,7 +1,8 @@
-import React from "react";
+'use client';
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Header from "../components/headers/header";
-
+import './globals.css';
 type Product = {
   id: number;
   title: string;
@@ -14,41 +15,74 @@ type Product = {
 async function getProducts(): Promise<Product[]> {
   try {
     const res = await fetch("https://api.alluresallol.com/products", {
-      cache: "no-store", // отключает кеш, всегда свежие данные
+      cache: "no-store",
     });
     const data = await res.json();
-    return Array.isArray(data) ? data.slice(0, 4) : [];
+    console.log("Products API response:", data);
+
+    // Support array, data.products, or data.data
+    const itemsArray = Array.isArray(data)
+      ? data
+      : Array.isArray((data as any).products)
+      ? (data as any).products
+      : Array.isArray((data as any).data)
+      ? (data as any).data
+      : [];
+
+    console.log("Normalized items:", itemsArray);
+    return itemsArray.slice(0, 4);
   } catch (err) {
     console.error("Ошибка при загрузке товаров:", err);
     return [];
   }
 }
 
-export default async function Home() {
-  const products = await getProducts();
+export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  useEffect(() => {
+    console.log("Starting product fetch...");
+    getProducts()
+      .then((data) => {
+        console.log("Fetched products:", data);
+        setProducts(data);
+      })
+      .catch((err) => {
+        console.error("Error in fetchProducts promise:", err);
+      });
+  }, []);
 
   return (
     <>
       <Header />
-      <div
-        style={{
-          width: "480px",
-          height: "330px",
-          marginTop: "15px",
-          marginLeft: "280px",
-          position: "relative",
-          opacity: 1,
-        }}
-      >
-        <Image
-          src="/baner1.png"
-          alt="Літо в розпалі - знижки до 70%"
-          fill
-          style={{
-            objectFit: "cover",
-            borderRadius: "16px",
-          }}
-        />
+      <div style={{ display: "flex", gap: "20px", marginTop: "15px", marginLeft: "280px" }}>
+        <div style={{ width: "480px", height: "330px", position: "relative", opacity: 1 }}>
+          <Image
+            src="/baner1.png"
+            alt="Літо в розпалі - знижки до 70%"
+            fill
+            style={{ objectFit: "cover", borderRadius: "16px" }}
+          />
+        </div>
+        <div style={{ width: "480px", height: "330px", position: "relative", opacity: 1 }}>
+          <Image
+            src="/baner2.png"
+            alt="Літо в розпалі - нові колекції"
+            fill
+            style={{ objectFit: "cover", borderRadius: "16px" }}
+          />
+        </div>
+      </div>
+      {/* Категории под баннерами */}
+      <div className="categories-section">
+        <h2 className="categories-section__title">Популярні товари</h2>
+        <div className="categories-list">
+          <button className="categories-list__button">Одяг та взуття</button>
+          <button className="categories-list__button categories-list__button--active">Електроніка</button>
+          <button className="categories-list__button">Спорт</button>
+          <button className="categories-list__button">Іграшки</button>
+          <button className="categories-list__button">Краса</button>
+          <button className="categories-list__button">Меблі</button>
+        </div>
       </div>
       <main style={{ padding: "20px", background: "#fafafa" }}>
         <h1 style={{ textAlign: "center", fontSize: 32, fontWeight: 700 }}>
@@ -89,7 +123,11 @@ export default async function Home() {
               </button>
 
               <img
-                src={p.image}
+                src={
+                  p.image.startsWith("http")
+                    ? p.image
+                    : `https://api.alluresallol.com${p.image}`
+                }
                 alt={p.title}
                 style={{
                   width: "100%",
