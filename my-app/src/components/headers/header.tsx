@@ -3,6 +3,7 @@
 import styles from './header.module.css';
 import { FaSearch, FaHeart, FaShoppingBag, FaUser, FaBars } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type Category = {
   category_id: number;
@@ -18,6 +19,22 @@ type Product = {
 export default function Header() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Example: check for an auth token in localStorage
+    const token = localStorage.getItem('authToken');
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const handleUserClick = () => {
+    if (isAuthenticated) {
+      router.push('/profile');
+    } else {
+      router.push('/auth');
+    }
+  };
 
   useEffect(() => {
     const fetchCategoriesFromProducts = async () => {
@@ -73,7 +90,10 @@ export default function Header() {
         <div className={styles.iconBlock}>
           <FaHeart />
           <FaShoppingBag />
-          <FaUser />
+          <FaUser
+            onClick={handleUserClick}
+            style={{ cursor: 'pointer' }}
+          />
         </div>
       </div>
 

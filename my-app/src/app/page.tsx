@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Header from "../components/headers/header";
+import Footer from "../components/footers/footer";
+import Partners from "../components/partners/partners";
 import './globals.css';
 type Product = {
   id: number;
@@ -54,7 +56,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div style={{ display: "flex", gap: "20px", marginTop: "15px", marginLeft: "280px" }}>
+      <div style={{ display: "flex", gap: "20px", marginTop: "15px", marginLeft: "170px" }}>
         <div style={{ width: "480px", height: "330px", position: "relative", opacity: 1 }}>
           <Image
             src="/baner1.png"
@@ -72,8 +74,11 @@ export default function Home() {
           />
         </div>
       </div>
-      {/* Категории под баннерами */}
-      <div className="categories-section">
+      {/* Популярні товари */}
+      <div
+        className="categories-section"
+        style={{ marginLeft: "170px", marginRight: "auto" }}
+      >
         <h2 className="categories-section__title">Популярні товари</h2>
         <div className="categories-list">
           <button className="categories-list__button">Одяг та взуття</button>
@@ -84,6 +89,72 @@ export default function Home() {
           <button className="categories-list__button">Меблі</button>
         </div>
       </div>
+      
+  
+      {/* Популярні категорії */}
+      {(() => {
+        const popularCategories = [
+          { label: "Одяг та взуття", image: "/cross.png", gridColumn: "1 / span 2", gridRow: "1" },
+          { label: "Електроніка", image: "/phone.png", gridColumn: "3", gridRow: "1" },
+          { label: "Спорт", image: "/bottle.png", gridColumn: "4", gridRow: "1" },
+          { label: "Іграшки", image: "/bear.png", gridColumn: "1", gridRow: "2" },
+          { label: "Краса", image: "/cream.png", gridColumn: "2", gridRow: "2" },
+          { label: "Меблі", image: "/sofa.png", gridColumn: "3 / span 2", gridRow: "2" },
+        ];
+        return (
+          <section style={{ maxWidth: "1000px", margin: "20px auto", padding: "0 20px" }}>
+            <h2 style={{ fontSize: "24px", fontWeight: 700, marginBottom: "16px" }}>
+              Популярні категорії
+            </h2>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "2fr 1fr 1fr 1fr",
+                gridTemplateRows: "150px 150px",
+                gap: "10px",
+              }}
+            >
+              {popularCategories.map((cat, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    gridColumn: cat.gridColumn,
+                    gridRow: cat.gridRow,
+                    height: "150px",
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "12px",
+                    background: "#f5f5f5",
+                  }}
+                >
+                  <img
+                    src={cat.image}
+                    alt={cat.label}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "12px",
+                      left: "12px",
+                      color: "#000",
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      background: "transparent",
+                    }}
+                  >
+                    {cat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
       <main style={{ padding: "20px", background: "#fafafa" }}>
         <h1 style={{ textAlign: "center", fontSize: 32, fontWeight: 700 }}>
           Маркетплейс
@@ -182,6 +253,8 @@ export default function Home() {
           ))}
         </div>
       </main>
+      <Partners />
+      <Footer />
     </>
   );
 }
